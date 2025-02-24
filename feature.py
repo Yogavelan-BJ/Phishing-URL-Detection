@@ -12,9 +12,7 @@ from dateutil.parser import parse as date_parse
 from urllib.parse import urlparse
 
 class FeatureExtraction:
-    features = []
     def __init__(self,url):
-        self.features = []
         self.url = url
         self.domain = ""
         self.whois_response = ""
@@ -24,7 +22,7 @@ class FeatureExtraction:
 
         try:
             self.response = requests.get(url)
-            self.soup = BeautifulSoup(response.text, 'html.parser')
+            self.soup = BeautifulSoup(self.response.text, 'html.parser')
         except:
             pass
 
@@ -39,43 +37,40 @@ class FeatureExtraction:
         except:
             pass
 
-
-        
-
-        self.features.append(self.UsingIp())
-        self.features.append(self.longUrl())
-        self.features.append(self.shortUrl())
-        self.features.append(self.symbol())
-        self.features.append(self.redirecting())
-        self.features.append(self.prefixSuffix())
-        self.features.append(self.SubDomains())
-        self.features.append(self.Hppts())
-        self.features.append(self.DomainRegLen())
-        self.features.append(self.Favicon())
-        
-
-        self.features.append(self.NonStdPort())
-        self.features.append(self.HTTPSDomainURL())
-        self.features.append(self.RequestURL())
-        self.features.append(self.AnchorURL())
-        self.features.append(self.LinksInScriptTags())
-        self.features.append(self.ServerFormHandler())
-        self.features.append(self.InfoEmail())
-        self.features.append(self.AbnormalURL())
-        self.features.append(self.WebsiteForwarding())
-        self.features.append(self.StatusBarCust())
-
-        self.features.append(self.DisableRightClick())
-        self.features.append(self.UsingPopupWindow())
-        self.features.append(self.IframeRedirection())
-        self.features.append(self.AgeofDomain())
-        self.features.append(self.DNSRecording())
-        self.features.append(self.WebsiteTraffic())
-        self.features.append(self.PageRank())
-        self.features.append(self.GoogleIndex())
-        self.features.append(self.LinksPointingToPage())
-        self.features.append(self.StatsReport())
-
+    def getFeaturesList(self):
+        features = []
+        features.append(self.UsingIp())
+        features.append(self.longUrl())
+        features.append(self.shortUrl())
+        features.append(self.symbol())
+        features.append(self.redirecting())
+        features.append(self.prefixSuffix())
+        features.append(self.SubDomains())
+        features.append(self.Hppts())
+        features.append(self.DomainRegLen())
+        features.append(self.Favicon())
+        features.append(self.NonStdPort())
+        features.append(self.HTTPSDomainURL())
+        features.append(self.RequestURL())
+        features.append(self.AnchorURL())
+        features.append(self.LinksInScriptTags())
+        features.append(self.ServerFormHandler())
+        features.append(self.InfoEmail())
+        features.append(self.AbnormalURL())
+        features.append(self.WebsiteForwarding())
+        features.append(self.StatusBarCust())
+        features.append(self.DisableRightClick())
+        features.append(self.UsingPopupWindow())
+        features.append(self.IframeRedirection())
+        features.append(self.AgeofDomain())
+        features.append(self.DNSRecording())
+        features.append(self.WebsiteTraffic())
+        features.append(self.PageRank())
+        features.append(self.GoogleIndex())
+        features.append(self.LinksPointingToPage())
+        features.append(self.StatsReport())
+        features.append(0)  # Placeholder feature to ensure the list has 31 elements
+        return features
 
      # 1.UsingIp
     def UsingIp(self):
@@ -484,6 +479,3 @@ class FeatureExtraction:
             return 1
         except:
             return 1
-    
-    def getFeaturesList(self):
-        return self.features
